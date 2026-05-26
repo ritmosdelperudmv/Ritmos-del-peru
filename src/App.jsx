@@ -68,7 +68,7 @@ const SAMPLE_EVENTS = [
   { id: 6,  title: "Clase de Caporales — Aquí Está Mi Perú", group: "Aquí Está Mi Perú", date: "2026-06-13", time: "6:00 PM", location: "Gaithersburg Elementary, 35 N Summit Ave, Gaithersburg, MD 20877", description: "Fecha, hora y lugar por confirmar.", host: "Aquí Está Mi Perú", published: true },
   { id: 15, title: "Clase de Caporales — Aquí Está Mi Perú", group: "Aquí Está Mi Perú", date: "2026-06-20", time: "6:00 PM", location: "Gaithersburg Elementary, 35 N Summit Ave, Gaithersburg, MD 20877", description: "Fecha, hora y lugar por confirmar.", host: "Aquí Está Mi Perú", published: true },
   { id: 16, title: "Clase de Caporales — Aquí Está Mi Perú", group: "Aquí Está Mi Perú", date: "2026-06-27", time: "6:00 PM", location: "Gaithersburg Elementary, 35 N Summit Ave, Gaithersburg, MD 20877", description: "Fecha, hora y lugar por confirmar.", host: "Aquí Está Mi Perú", published: true },
-  { id: 7,  title: "Clase de Festejo — Papalca",                      group: "Papalca",                     date: "2026-06-06", time: "10:00 AM", location: "Dirección entregada al registrarse (requiere registro previo)", description: "Requiere registro previo para recibir la dirección. Contacto: Victor · 240-839-8803", host: "Papalca", published: true },
+  { id: 7,  title: "Clase de Festejo — Papalca",                      group: "Papalca",                     date: "2026-06-06", time: "10:00 AM", location: "📍 Ubicación privada — regístrate para recibirla", description: "Requiere registro previo para recibir la dirección. Contacto: Victor · 240-839-8803", host: "Papalca", published: true },
   { id: 8,  title: "Clase de Ritmos Afro Peruanos — Perú Folclore",                group: "Perú Folclore",               date: "2026-06-09", time: "7:00 PM", location: "14301 Climbing Rose Way, Centreville, VA 20121", description: "Contacto: Andrés Arevalo · 202-500-9328", host: "Perú Folclore", published: true },
   { id: 9,  title: "Clase de Danzas Peruanas — Fraternidad Matices del Perú", group: "Fraternidad Matices del Perú", date: "2026-06-06", time: "5:00 PM", location: "Washington Square Neighborhood Park, 17800 Amity Drive, Gaithersburg, MD 20877", description: "Contacto: Maryorie · 240-477-2370 · lm.delao75@gmail.com", host: "Fraternidad Matices del Perú", published: true },
   { id: 13, title: "Clase de Danzas Peruanas — Fraternidad Matices del Perú", group: "Fraternidad Matices del Perú", date: "2026-06-13", time: "5:00 PM", location: "Washington Square Neighborhood Park, 17800 Amity Drive, Gaithersburg, MD 20877", description: "Contacto: Maryorie · 240-477-2370 · lm.delao75@gmail.com", host: "Fraternidad Matices del Perú", published: true },
@@ -208,7 +208,14 @@ function CardView({ events, onEdit, onDelete, onView, onTogglePublish, adminMode
               {adminMode && <StatusBadge published={ev.published} />}
             </div>
 
-            <h3 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.1rem", margin:"0 0 0.5rem", lineHeight:1.3 }}>{ev.title}</h3>
+            <h3 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.1rem", margin:"0 0 0.25rem", lineHeight:1.3 }}>
+              {ev.title.includes(" — ") ? ev.title.split(" — ")[1] : ev.title}
+            </h3>
+            {ev.title.includes(" — ") && (
+              <p style={{ fontSize:"0.8rem", color:P.muted, margin:"0 0 0.5rem", fontStyle:"italic" }}>
+                {ev.title.split(" — ")[0]}
+              </p>
+            )}
             {ev.date && <p style={{ color:P.muted, fontSize:"0.82rem", margin:"0 0 0.2rem" }}>📅 {formatDate(ev.date)}{ev.time ? ` · ${ev.time}` : ""}</p>}
             {ev.location && <p style={{ color:P.muted, fontSize:"0.82rem", margin:"0 0 0.75rem" }}>📍 {ev.location.slice(0,60)}{ev.location.length>60?"…":""}</p>}
             {ev.description && <p style={{ color:"#a07850", fontSize:"0.8rem", margin:0, lineHeight:1.5 }}>{ev.description.slice(0,80)}{ev.description.length>80?"…":""}</p>}
@@ -284,6 +291,31 @@ function CalendarView({ events, onView }) {
       <div style={{ display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"1.25rem" }}>
         <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.gold, fontSize:"1.3rem", margin:0 }}>{MONTHS[viewMonth]} {viewYear}</h2>
       </div>
+      {/* Mobile-friendly upcoming events list */}
+      <div style={{ display:"block", marginBottom:"1.5rem" }}>
+        <p style={{ fontSize:"0.72rem", letterSpacing:"0.1em", textTransform:"uppercase", color:P.muted, margin:"0 0 0.75rem" }}>Próximos eventos en junio</p>
+        <div style={{ display:"flex", flexDirection:"column", gap:"0.5rem" }}>
+          {events.filter(e => e.date).sort((a,b) => a.date.localeCompare(b.date)).map(ev => {
+            const color = ev.published ? (GROUP_COLORS[ev.group] || P.gold) : "#fbbf24";
+            return (
+              <div key={ev.id} onClick={() => onView(ev)} style={{ display:"flex", alignItems:"center", gap:"0.75rem", background:"#fff", border:`1px solid ${color}40`, borderLeft:`4px solid ${color}`, borderRadius:"0.5rem", padding:"0.6rem 0.85rem", cursor:"pointer" }}>
+                <div style={{ minWidth:"42px", textAlign:"center", background:`${color}15`, borderRadius:"0.4rem", padding:"0.25rem" }}>
+                  <div style={{ fontSize:"1rem", fontWeight:800, color, lineHeight:1 }}>{ev.date.split("-")[2]}</div>
+                  <div style={{ fontSize:"0.6rem", color:P.muted, textTransform:"uppercase" }}>{MONTHS[parseInt(ev.date.split("-")[1])-1].slice(0,3)}</div>
+                </div>
+                <div style={{ flex:1, minWidth:0 }}>
+                  <div style={{ fontSize:"0.82rem", fontWeight:700, color:P.text, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>
+                    {ev.title.includes(" — ") ? ev.title.split(" — ")[1] : ev.title}
+                  </div>
+                  <div style={{ fontSize:"0.72rem", color:P.muted }}>{ev.title.includes(" — ") ? ev.title.split(" — ")[1].split("—")[0] : ""}{ev.time ? " · " + ev.time : ""}</div>
+                  <div style={{ fontSize:"0.72rem", color, fontWeight:600 }}>{ev.group}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <p style={{ fontSize:"0.72rem", letterSpacing:"0.1em", textTransform:"uppercase", color:P.muted, margin:"0 0 0.75rem" }}>Vista de calendario</p>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:"2px", marginBottom:"3px" }}>
         {DAYS.map(d => <div key={d} style={{ textAlign:"center", fontSize:"0.68rem", color:P.muted, letterSpacing:"0.08em", padding:"0.4rem 0", textTransform:"uppercase", opacity:0.7 }}>{d}</div>)}
       </div>
@@ -415,17 +447,30 @@ export default function CommunityCalendar() {
                 <h1 style={{ fontFamily:"'Playfair Display', serif", fontSize:"clamp(1.6rem, 4vw, 2.6rem)", margin:"0 0 0.3rem", color:"#FFFFFF", lineHeight:1.1 }}>
                   Ritmos del Perú DMV 2026
                 </h1>
-                <p style={{ color:"rgba(255,255,255,0.9)", margin:0, fontSize:"0.88rem", lineHeight:1.6 }}>Clases de folclore y música peruana gratuitas ofrecidas por distintas escuelas y artistas del DMV · Junio 2026</p>
+                <p style={{ color:"rgba(255,255,255,0.9)", margin:"0 0 0.75rem", fontSize:"0.88rem", lineHeight:1.6 }}>Clases de folclore y música peruana gratuitas ofrecidas por distintas escuelas y artistas del DMV · Junio 2026</p>
+                <p style={{ color:"#FFE58A", margin:0, fontSize:"0.85rem", fontWeight:600 }}>👇 Encuentra una clase cerca de ti — ¡todas son gratuitas y abiertas a la comunidad!</p>
               </div>
             </div>
 
             {/* Admin toggle */}
             <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:"0.4rem" }}>
-              <div style={{ display:"flex", background:"rgba(255,255,255,0.3)", border:`1px solid ${P.border}`, borderRadius:"0.6rem", overflow:"hidden" }}>
-                <button onClick={() => { if(adminMode){ setAdminMode(false); } else { setShowPasswordModal(true); } }}
-                  style={{ padding:"0.45rem 1rem", fontSize:"0.78rem", fontWeight:600, cursor:"pointer", border:"none", background: adminMode ? "rgba(255,255,255,0.25)" : "transparent", color: adminMode ? "#FFFFFF" : "rgba(255,255,255,0.6)", transition:"all 0.15s" }}>
-                  {adminMode ? "🔓 Admin" : "🔒 Admin"}
+              <div style={{ display:"flex", gap:"0.5rem", alignItems:"center" }}>
+                <button onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({ title:"Ritmos del Peru DMV 2026", url: window.location.href });
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert("Enlace copiado!");
+                  }
+                }} style={{ padding:"0.45rem 1rem", fontSize:"0.78rem", fontWeight:600, cursor:"pointer", border:"2px solid rgba(255,255,255,0.5)", borderRadius:"0.6rem", background:"rgba(255,255,255,0.15)", color:"#fff", display:"flex", alignItems:"center", gap:"0.4rem" }}>
+                  🔗 Compartir
                 </button>
+                <div style={{ display:"flex", background:"rgba(255,255,255,0.3)", border:`1px solid ${P.border}`, borderRadius:"0.6rem", overflow:"hidden" }}>
+                  <button onClick={() => { if(adminMode){ setAdminMode(false); } else { setShowPasswordModal(true); } }}
+                    style={{ padding:"0.45rem 1rem", fontSize:"0.78rem", fontWeight:600, cursor:"pointer", border:"none", background: adminMode ? "rgba(255,255,255,0.25)" : "transparent", color: adminMode ? "#FFFFFF" : "rgba(255,255,255,0.6)", transition:"all 0.15s" }}>
+                    {adminMode ? "🔓 Admin" : "🔒 Admin"}
+                  </button>
+                </div>
               </div>
               {adminMode && draftCount > 0 && <span style={{ fontSize:"0.7rem", color:"#FFE58A" }}>◌ {draftCount} borrador{draftCount!==1?"es":""} ocultos</span>}
             </div>
@@ -484,7 +529,7 @@ export default function CommunityCalendar() {
       {/* ── ABOUT ── */}
       <div style={{ background:P.bgMid, borderTop:`3px solid ${P.gold}`, borderBottom:`1px solid ${P.border}`, padding:"3rem 1.5rem" }}>
         <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
-          <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", textTransform:"uppercase", color:P.gold, margin:"0 0 1rem" }}>¿Qué es Ritmos del Perú?</p>
+          <h2 style={{ fontFamily:"'Playfair Display', serif", fontSize:"clamp(1.6rem, 3vw, 2.2rem)", color:P.red, margin:"0 0 1rem", borderLeft:`4px solid ${P.gold}`, paddingLeft:"1rem" }}>¿Qué es Ritmos del Perú?</h2>
           <p style={{ fontSize:"clamp(1rem, 2.5vw, 1.25rem)", color:P.text, lineHeight:1.7, margin:"0 0 2rem", maxWidth:"800px" }}>
             Un calendario de eventos que ofrece clases y talleres gratuitos en el área del DMV, ofrecidas por distintos grupos de danza y música peruana.
           </p>
@@ -516,7 +561,7 @@ export default function CommunityCalendar() {
               style={{ border:0, display:"block" }}
               loading="lazy"
               allowFullScreen
-              src={`https://www.google.com/maps/embed/v1/search?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=George+Mason+Regional+Library+Annandale+VA|Thomas+Jefferson+Library+Falls+Church+VA|Richard+Byrd+Library+Springfield+VA|3700+S+Four+Mile+Run+Arlington+VA|Gaithersburg+Elementary+35+N+Summit+Ave+MD|14301+Climbing+Rose+Way+Centreville+VA|Calletanas+4300+Chantilly+Shopping+Center+VA|Inca+Social+1776+Wilson+Blvd+Arlington+VA`}
+              src="https://www.google.com/maps/embed?pb=!1m56!1m12!1m3!1d99174.0!2d-77.15!3d38.88!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m41!3e0!4m5!1s0x89b64c2c3c3c3c3b%3A0x1!2sGeorge+Mason+Regional+Library%2C+7001+Little+River+Tpke%2C+Annandale%2C+VA+22003!3m2!1d38.8304!2d-77.1977!4m5!1s0x89b7b6c6c6c6c6c6%3A0x1!2sThomas+Jefferson+Library%2C+7415+Arlington+Blvd%2C+Falls+Church%2C+VA+22042!3m2!1d38.8601!2d-77.1441!4m5!1s0x89b6e5e5e5e5e5e5%3A0x1!2sRichard+Byrd+Library%2C+7250+Commerce+St%2C+Springfield%2C+VA+22150!3m2!1d38.7601!2d-77.1441!4m5!1s0x89b7c4c4c4c4c4c4%3A0x1!2s3700+S+Four+Mile+Run+Dr%2C+Arlington%2C+VA!3m2!1d38.8501!2d-77.0901!4m5!1s0x89b62f2f2f2f2f2f%3A0x1!2sGaithersburg+Elementary%2C+35+N+Summit+Ave%2C+Gaithersburg%2C+MD+20877!3m2!1d39.1401!2d-77.2001!4m5!1s0x89b64f4f4f4f4f4f%3A0x1!2s14301+Climbing+Rose+Way%2C+Centreville%2C+VA+20121!3m2!1d38.8201!2d-77.4301!5e0!3m2!1sen!2sus!4v1234567890"
             />
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:"0.75rem", marginTop:"1.25rem" }}>
