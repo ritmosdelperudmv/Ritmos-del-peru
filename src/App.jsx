@@ -554,15 +554,16 @@ export default function CommunityCalendar() {
           <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", textTransform:"uppercase", color:P.gold, margin:"0 0 0.4rem" }}>✦ Ubicaciones</p>
           <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.5rem", margin:"0 0 1.5rem" }}>¿Dónde son los eventos?</h2>
           <div style={{ borderRadius:"1rem", overflow:"hidden", border:`2px solid ${P.border}`, boxShadow:`0 4px 20px ${P.gold}20` }}>
-            <iframe
-              title="Mapa de eventos"
-              width="100%"
-              height="420"
-              style={{ border:0, display:"block" }}
-              loading="lazy"
-              allowFullScreen
-              src="https://www.google.com/maps/embed?pb=!1m56!1m12!1m3!1d99174.0!2d-77.15!3d38.88!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m41!3e0!4m5!1s0x89b64c2c3c3c3c3b%3A0x1!2sGeorge+Mason+Regional+Library%2C+7001+Little+River+Tpke%2C+Annandale%2C+VA+22003!3m2!1d38.8304!2d-77.1977!4m5!1s0x89b7b6c6c6c6c6c6%3A0x1!2sThomas+Jefferson+Library%2C+7415+Arlington+Blvd%2C+Falls+Church%2C+VA+22042!3m2!1d38.8601!2d-77.1441!4m5!1s0x89b6e5e5e5e5e5e5%3A0x1!2sRichard+Byrd+Library%2C+7250+Commerce+St%2C+Springfield%2C+VA+22150!3m2!1d38.7601!2d-77.1441!4m5!1s0x89b7c4c4c4c4c4c4%3A0x1!2s3700+S+Four+Mile+Run+Dr%2C+Arlington%2C+VA!3m2!1d38.8501!2d-77.0901!4m5!1s0x89b62f2f2f2f2f2f%3A0x1!2sGaithersburg+Elementary%2C+35+N+Summit+Ave%2C+Gaithersburg%2C+MD+20877!3m2!1d39.1401!2d-77.2001!4m5!1s0x89b64f4f4f4f4f4f%3A0x1!2s14301+Climbing+Rose+Way%2C+Centreville%2C+VA+20121!3m2!1d38.8201!2d-77.4301!5e0!3m2!1sen!2sus!4v1234567890"
-            />
+            <a href="https://www.google.com/maps/search/?api=1&query=Peruvian+dance+classes+DMV+Virginia+Maryland" target="_blank" rel="noopener noreferrer" style={{ display:"block", textDecoration:"none" }}>
+              <div style={{ width:"100%", height:"280px", background:`linear-gradient(135deg, ${P.tan}, #fff)`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem", border:`2px dashed ${P.border}`, borderRadius:"0.75rem", cursor:"pointer" }}>
+                <div style={{ fontSize:"3rem" }}>🗺️</div>
+                <div style={{ textAlign:"center" }}>
+                  <p style={{ fontFamily:"'Playfair Display', serif", fontSize:"1.2rem", color:P.text, margin:"0 0 0.4rem", fontWeight:700 }}>Ver todos los eventos en Google Maps</p>
+                  <p style={{ fontSize:"0.85rem", color:P.muted, margin:0 }}>Toca para abrir el mapa con todas las ubicaciones</p>
+                </div>
+                <div style={{ padding:"0.6rem 1.5rem", background:`linear-gradient(135deg, ${P.red}, ${P.gold})`, borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.9rem" }}>Abrir Mapa →</div>
+              </div>
+            </a>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:"0.75rem", marginTop:"1.25rem" }}>
             {[
