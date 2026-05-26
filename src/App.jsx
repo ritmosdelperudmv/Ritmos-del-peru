@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 // ─── MAIN LOGO ───────────────────────────────────────────────────────────────
 // Replace with your logo URL. Example: "https://yoursite.com/logo.png"
 // Or put logo.png in your /public folder and use "/logo.png"
-const MAIN_LOGO_URL = "/Ritmos del Peru.jpg"; // ← paste your logo URL here
+const MAIN_LOGO_URL = "/ritmos del peru logo.jpg"; // ← paste your logo URL here
 
 // ─── GROUPS & COLORS ─────────────────────────────────────────────────────────
 const GROUPS = ["All", "Sumaj Tusuy DMV", "Sentimiento Peruano", "Aquí Está Mi Perú", "Papalca", "Perú Folclore", "Fraternidad Matices del Perú", "Percy Chinchilla", "Chicha Morada", "Kuyayky"];
