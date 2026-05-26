@@ -21,6 +21,7 @@ const GROUP_INSTAGRAM = {
 };
 
 const REQUIRES_REGISTRATION = ["Sentimiento Peruano", "Papalca"];
+const INSTRUMENT_ENCOURAGED = ["Percy Chinchilla", "Kuyayky"];
 
 const REGISTRATION_CONTACT = {
   "Sentimiento Peruano": "Inscripciones: Catherine · 703-304-8322",
@@ -72,9 +73,9 @@ const SAMPLE_EVENTS = [
   { id: 8,  title: "Clase de Ritmos Afro Peruanos — Perú Folclore",                group: "Perú Folclore",               date: "2026-06-09", time: "7:00 PM", location: "14301 Climbing Rose Way, Centreville, VA 20121", description: "Contacto: Andrés Arevalo · 202-500-9328", description: "Descubre los Ritmos Afro Peruanos en esta clase especial que celebra la rica herencia africana en la música y danza del Perú. Abierta a todos los niveles.", host: "Perú Folclore", published: true },
   { id: 9,  title: "Clase de Danzas Peruanas — Fraternidad Matices del Perú", group: "Fraternidad Matices del Perú", date: "2026-06-06", time: "5:00 PM", location: "Washington Square Neighborhood Park, 17800 Amity Drive, Gaithersburg, MD 20877", description: "Contacto: Maryorie · 240-477-2370 · lm.delao75@gmail.com", description: "Clases de danzas folclóricas peruanas en un ambiente familiar y acogedor. Todas las edades y niveles son bienvenidos. ¡Ven a ser parte de nuestra fraternidad!", host: "Fraternidad Matices del Perú", published: true },
   { id: 13, title: "Clase de Danzas Peruanas — Fraternidad Matices del Perú", group: "Fraternidad Matices del Perú", date: "2026-06-13", time: "5:00 PM", location: "Washington Square Neighborhood Park, 17800 Amity Drive, Gaithersburg, MD 20877", description: "Contacto: Maryorie · 240-477-2370 · lm.delao75@gmail.com", description: "Clases de danzas folclóricas peruanas en un ambiente familiar y acogedor. Todas las edades y niveles son bienvenidos. ¡Ven a ser parte de nuestra fraternidad!", host: "Fraternidad Matices del Perú", published: true },
-  { id: 10, title: "Clase de Cajón Peruano — Percy Chinchilla",             group: "Percy Chinchilla",            date: "2026-06-06", time: "11:00 AM – 12:30 PM", location: "Calletana's Peruvian Chicken & Cuisine, 4300 Chantilly Shopping Center, Chantilly, VA 20151", description: "Contacto: Percy · 240-963-8503 · percychinchilla18@gmail.com", description: "Aprende a tocar el cajón peruano, instrumento icónico de la música afroperuana. Clase práctica para principiantes y entusiastas de la percusión. 🔜 Próximamente: clase de danza afroperuana abierta a todas las edades.", host: "Percy Chinchilla", published: true },
+  { id: 10, title: "Clase de Cajón Peruano — Percy Chinchilla",             group: "Percy Chinchilla",            date: "2026-06-06", time: "11:00 AM – 12:30 PM", location: "Calletana's Peruvian Chicken & Cuisine, 4300 Chantilly Shopping Center, Chantilly, VA 20151", description: "Contacto: Percy · 240-963-8503 · percychinchilla18@gmail.com", description: "Aprende a tocar el cajón peruano, instrumento icónico de la música afroperuana. Clase práctica para principiantes y entusiastas de la percusión. 🥁 Se recomienda traer tu cajón si tienes uno. 🔜 Próximamente: clase de danza afroperuana abierta a todas las edades.", host: "Percy Chinchilla", published: true },
   { id: 11, title: "¡Próximamente! — Chicha Morada",                group: "Chicha Morada",               date: "", time: "", location: "Inca Social, 1776 Wilson Blvd, Arlington, VA 22209", description: "¡Próximamente! Estamos preparando algo especial en Inca Social. Mantente pendiente. Contacto: chichamoradadc@gmail.com", host: "Chicha Morada", published: false },
-  { id: 12, title: "Masterclass de Música de Cámara Andina — Kuyayky",                      group: "Kuyayky",                     date: "2026-06-06", time: "4:00 PM – 6:00 PM", location: "George Mason Regional Library, 7001 Little River Turnpike, Annandale, VA 22003", description: "Contacto: Jose Hurtado · (786) 228-6189", description: "Sumérgete en la música de cámara andina en esta masterclass única. Explora los sonidos, ritmos e instrumentos tradicionales de los Andes peruanos.", host: "Kuyayky", published: true },
+  { id: 12, title: "Masterclass de Música de Cámara Andina — Kuyayky",                      group: "Kuyayky",                     date: "2026-06-06", time: "4:00 PM – 6:00 PM", location: "George Mason Regional Library, 7001 Little River Turnpike, Annandale, VA 22003", description: "Contacto: Jose Hurtado · (786) 228-6189", description: "Sumérgete en la música de cámara andina en esta masterclass única. Explora los sonidos, ritmos e instrumentos tradicionales de los Andes peruanos. 🎵 Se recomienda traer tu instrumento — no es obligatorio pero sí muy alentado.", host: "Kuyayky", published: true },
 ];
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -227,6 +228,13 @@ function CardView({ events, onEdit, onDelete, onView, onTogglePublish, adminMode
                 <div style={{ fontSize:"0.78rem", color:P.brown }}>{REGISTRATION_CONTACT[ev.group]}</div>
               </div>
             )}
+            {/* Instrument badge */}
+            {INSTRUMENT_ENCOURAGED.includes(ev.group) && (
+              <div style={{ display:"inline-flex", alignItems:"center", gap:"0.3rem", marginTop:"0.5rem", background:"rgba(184,134,11,0.08)", border:`1px solid ${P.gold}50`, borderRadius:"0.5rem", padding:"0.4rem 0.75rem", fontSize:"0.72rem", color:P.gold, fontWeight:700 }}>
+                🎵 Trae tu instrumento
+              </div>
+            )}
+
             {/* Public action buttons */}
             {!adminMode && (
               <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.85rem", flexWrap:"wrap" }} onClick={e => e.stopPropagation()}>
