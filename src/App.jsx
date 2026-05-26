@@ -334,13 +334,11 @@ function ShareBar() {
         🎉 ¡Comparte el calendario con tu comunidad!
       </p>
       <div style={{ display:"flex", justifyContent:"center", gap:"0.75rem", flexWrap:"wrap" }}>
-        <a href={`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`} target="_blank" rel="noopener noreferrer"
+        <a href={"https://wa.me/?text=" + encodeURIComponent("Clases gratuitas de danza y musica peruana en el DMV - Junio 2026 " + url)} target="_blank" rel="noopener noreferrer"
           style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem", padding:"0.6rem 1.25rem", background:"#25D366", border:"none", borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.85rem", textDecoration:"none", cursor:"pointer" }}>
           💬 WhatsApp
         </a>
-        <a href={`mailto:?subject=${encodeURIComponent("Ritmos del Peru DMV 2026")}&body=${encodeURIComponent(text + "
-
-" + url)}`}
+        <a href={"mailto:?subject=" + encodeURIComponent("Ritmos del Peru DMV 2026") + "&body=" + encodeURIComponent("Clases gratuitas de danza y musica peruana en el DMV - Junio 2026 " + url)}
           style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem", padding:"0.6rem 1.25rem", background:"rgba(255,255,255,0.15)", border:"2px solid rgba(255,255,255,0.4)", borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.85rem", textDecoration:"none", cursor:"pointer" }}>
           📧 Email
         </a>
