@@ -324,8 +324,8 @@ export default function CommunityCalendar() {
             {/* Logo + Title */}
             <div style={{ display:"flex", alignItems:"center", gap:"1.25rem" }}>
               {MAIN_LOGO_URL
-                ? <img src={MAIN_LOGO_URL} alt="Logo" style={{ height:"72px", width:"72px", objectFit:"contain", borderRadius:"0.75rem", border:`2px solid ${P.gold}` }} />
-                : <div style={{ height:"72px", width:"72px", borderRadius:"0.75rem", border:`2px solid ${P.gold}`, background:P.bgMid, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.8rem" }}>🇵🇪</div>
+                ? <img src={MAIN_LOGO_URL} alt="Logo" style={{ height:"110px", width:"110px", objectFit:"contain", borderRadius:"0.75rem", border:`2px solid ${P.gold}` }} />
+                : <div style={{ height:"110px", width:"110px", borderRadius:"0.75rem", border:`2px solid ${P.gold}`, background:P.bgMid, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"2.5rem" }}>🇵🇪</div>
               }
               <div>
                 <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", color:"#FFE58A", textTransform:"uppercase", margin:"0 0 0.3rem", opacity:1, display:"none" }}>✦ Calendario Comunitario</p>
