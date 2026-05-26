@@ -149,7 +149,7 @@ function EventForm({ initial, onSave, onCancel }) {
   const labelStyle = { fontSize:"0.72rem", letterSpacing:"0.08em", color:P.muted, textTransform:"uppercase", marginBottom:"0.3rem", display:"block" };
   return (
     <div>
-      <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.gold, marginBottom:"1.5rem", fontSize:"1.35rem" }}>{initial?.id ? "Editar Evento" : "Agregar Evento"}</h2>
+      <h2 style={{ fontFamily:"'Montserrat', sans-serif", color:P.gold, marginBottom:"1.5rem", fontSize:"1.35rem" }}>{initial?.id ? "Editar Evento" : "Agregar Evento"}</h2>
       <div style={{ display:"grid", gap:"1rem" }}>
         {[["Título","title","text"],["Grupo / Anfitrión","host","text"],["Lugar","location","text"],["Fecha","date","date"],["Hora","time","text"]].map(([label, key, type]) => (
           <div key={key}>
@@ -208,7 +208,7 @@ function CardView({ events, onEdit, onDelete, onView, onTogglePublish, adminMode
               {adminMode && <StatusBadge published={ev.published} />}
             </div>
 
-            <h3 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.1rem", margin:"0 0 0.25rem", lineHeight:1.3 }}>
+            <h3 style={{ fontFamily:"'Nunito', sans-serif", color:P.text, fontSize:"1.1rem", margin:"0 0 0.25rem", lineHeight:1.3 }}>
               {ev.title.includes(" — ") ? ev.title.split(" — ")[1] : ev.title}
             </h3>
             {ev.title.includes(" — ") && (
@@ -289,7 +289,7 @@ function CalendarView({ events, onView }) {
   return (
     <div>
       <div style={{ display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"1.25rem" }}>
-        <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.gold, fontSize:"1.3rem", margin:0 }}>{MONTHS[viewMonth]} {viewYear}</h2>
+        <h2 style={{ fontFamily:"'Montserrat', sans-serif", color:P.gold, fontSize:"1.3rem", margin:0 }}>{MONTHS[viewMonth]} {viewYear}</h2>
       </div>
       {/* Mobile-friendly upcoming events list */}
       <div style={{ display:"block", marginBottom:"1.5rem" }}>
@@ -424,8 +424,8 @@ export default function CommunityCalendar() {
   const handleTogglePublish = (id) => setEvents(evs => evs.map(e => e.id === id ? { ...e, published: !e.published } : e));
 
   return (
-    <div style={{ minHeight:"100vh", background:P.bg, color:P.text, fontFamily:"'DM Sans', sans-serif" }}>
-      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <div style={{ minHeight:"100vh", background:P.bg, color:P.text, fontFamily:"'Montserrat', sans-serif" }}>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
 
       {/* ── HEADER ── */}
       <div style={{ background:`linear-gradient(160deg, #C0392B 0%, #922B21 100%)`, borderBottom:`1px solid ${P.border}`, padding:"2.5rem 1.5rem 2rem", position:"relative", overflow:"hidden" }}>
@@ -444,7 +444,7 @@ export default function CommunityCalendar() {
               }
               <div>
                 <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", color:"#FFE58A", textTransform:"uppercase", margin:"0 0 0.3rem", opacity:1, display:"none" }}>✦ Calendario Comunitario</p>
-                <h1 style={{ fontFamily:"'Playfair Display', serif", fontSize:"clamp(1.6rem, 4vw, 2.6rem)", margin:"0 0 0.3rem", color:"#FFFFFF", lineHeight:1.1 }}>
+                <h1 style={{ fontFamily:"'Montserrat', sans-serif", fontSize:"clamp(1.6rem, 4vw, 2.6rem)", margin:"0 0 0.3rem", color:"#FFFFFF", lineHeight:1.1 }}>
                   Ritmos del Perú DMV 2026
                 </h1>
                 <p style={{ color:"rgba(255,255,255,0.9)", margin:"0 0 0.75rem", fontSize:"0.88rem", lineHeight:1.6 }}>Clases de folclore y música peruana gratuitas ofrecidas por distintas escuelas y artistas del DMV · Junio 2026</p>
@@ -529,7 +529,7 @@ export default function CommunityCalendar() {
       {/* ── ABOUT ── */}
       <div style={{ background:P.bgMid, borderTop:`3px solid ${P.gold}`, borderBottom:`1px solid ${P.border}`, padding:"3rem 1.5rem" }}>
         <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
-          <h2 style={{ fontFamily:"'Playfair Display', serif", fontSize:"clamp(1.6rem, 3vw, 2.2rem)", color:P.red, margin:"0 0 1rem", borderLeft:`4px solid ${P.gold}`, paddingLeft:"1rem" }}>¿Qué es Ritmos del Perú?</h2>
+          <h2 style={{ fontFamily:"'Montserrat', sans-serif", fontSize:"clamp(1.6rem, 3vw, 2.2rem)", color:P.red, margin:"0 0 1rem", borderLeft:`4px solid ${P.gold}`, paddingLeft:"1rem" }}>¿Qué es Ritmos del Perú?</h2>
           <p style={{ fontSize:"clamp(1rem, 2.5vw, 1.25rem)", color:P.text, lineHeight:1.7, margin:"0 0 2rem", maxWidth:"800px" }}>
             Un calendario de eventos que ofrece clases y talleres gratuitos en el área del DMV, ofrecidas por distintos grupos de danza y música peruana.
           </p>
@@ -540,7 +540,7 @@ export default function CommunityCalendar() {
               { title:"Mes Patrio",  color:"#C9A87C",  text:"Preparamos a la comunidad para las celebraciones de independencia de julio." },
             ].map(card => (
               <div key={card.title} style={{ background:P.bgCard, border:`1px solid ${P.border}`, borderTop:`3px solid ${card.color}`, borderRadius:"0.75rem", padding:"1.5rem" }}>
-                <h3 style={{ fontFamily:"'Playfair Display', serif", color:card.color, fontSize:"1.3rem", margin:"0 0 1rem" }}>{card.title}</h3>
+                <h3 style={{ fontFamily:"'Montserrat', sans-serif", color:card.color, fontSize:"1.3rem", margin:"0 0 1rem" }}>{card.title}</h3>
                 <p style={{ color:P.muted, fontSize:"0.92rem", lineHeight:1.65, margin:0 }}>{card.text}</p>
               </div>
             ))}
@@ -552,13 +552,13 @@ export default function CommunityCalendar() {
       <div style={{ background:P.tan, borderBottom:`1px solid ${P.border}`, padding:"3rem 1.5rem" }}>
         <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
           <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", textTransform:"uppercase", color:P.gold, margin:"0 0 0.4rem" }}>✦ Ubicaciones</p>
-          <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.5rem", margin:"0 0 1.5rem" }}>¿Dónde son los eventos?</h2>
+          <h2 style={{ fontFamily:"'Nunito', sans-serif", color:P.text, fontSize:"1.5rem", margin:"0 0 1.5rem" }}>¿Dónde son los eventos?</h2>
           <div style={{ borderRadius:"1rem", overflow:"hidden", border:`2px solid ${P.border}`, boxShadow:`0 4px 20px ${P.gold}20` }}>
             <a href="https://www.google.com/maps/dir/George+Mason+Regional+Library,+7001+Little+River+Tpke,+Annandale,+VA+22003/Thomas+Jefferson+Library,+7415+Arlington+Blvd,+Falls+Church,+VA+22042/Richard+Byrd+Library,+7250+Commerce+St,+Springfield,+VA+22150/3700+S+Four+Mile+Run+Dr,+Arlington,+VA/Gaithersburg+Elementary,+35+N+Summit+Ave,+Gaithersburg,+MD+20877/14301+Climbing+Rose+Way,+Centreville,+VA+20121/Calletana's,+4300+Chantilly+Shopping+Center,+Chantilly,+VA/1776+Wilson+Blvd,+Arlington,+VA/Washington+Square+Neighborhood+Park,+17800+Amity+Dr,+Gaithersburg,+MD" target="_blank" rel="noopener noreferrer" style={{ display:"block", textDecoration:"none" }}>
               <div style={{ width:"100%", height:"280px", background:`linear-gradient(135deg, ${P.tan}, #fff)`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem", border:`2px dashed ${P.border}`, borderRadius:"0.75rem", cursor:"pointer" }}>
                 <div style={{ fontSize:"3rem" }}>🗺️</div>
                 <div style={{ textAlign:"center" }}>
-                  <p style={{ fontFamily:"'Playfair Display', serif", fontSize:"1.2rem", color:P.text, margin:"0 0 0.4rem", fontWeight:700 }}>Ver todas las ubicaciones en Google Maps</p>
+                  <p style={{ fontFamily:"'Montserrat', sans-serif", fontSize:"1.2rem", color:P.text, margin:"0 0 0.4rem", fontWeight:700 }}>Ver todas las ubicaciones en Google Maps</p>
                   <p style={{ fontSize:"0.85rem", color:P.muted, margin:0 }}>Toca cada tarjeta abajo para abrir la dirección exacta</p>
                 </div>
                 <div style={{ padding:"0.6rem 1.5rem", background:`linear-gradient(135deg, ${P.red}, ${P.gold})`, borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.9rem" }}>Ver área del DMV →</div>
@@ -621,7 +621,7 @@ export default function CommunityCalendar() {
           <div>
             <div style={{ textAlign:"center", marginBottom:"1.5rem" }}>
               <div style={{ fontSize:"2.5rem", marginBottom:"0.5rem" }}>🔒</div>
-              <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.4rem", margin:"0 0 0.25rem" }}>Acceso Admin</h2>
+              <h2 style={{ fontFamily:"'Nunito', sans-serif", color:P.text, fontSize:"1.4rem", margin:"0 0 0.25rem" }}>Acceso Admin</h2>
               <p style={{ color:P.muted, fontSize:"0.85rem", margin:0 }}>Ingresa tu contraseña para continuar</p>
             </div>
             <input
@@ -657,7 +657,7 @@ export default function CommunityCalendar() {
               </div>
               {adminMode && <StatusBadge published={selected.published} />}
             </div>
-            <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.4rem", margin:"0 0 1.1rem" }}>{selected.title}</h2>
+            <h2 style={{ fontFamily:"'Nunito', sans-serif", color:P.text, fontSize:"1.4rem", margin:"0 0 1.1rem" }}>{selected.title}</h2>
             {[["📅 Fecha y Hora", `${formatDate(selected.date)}${selected.time ? " · "+selected.time : ""}`], ["📍 Lugar", selected.location], ["🎭 Grupo", selected.host]].map(([k,v]) => v ? (
               <div key={k} style={{ marginBottom:"0.65rem" }}>
                 <span style={{ color:P.muted, fontSize:"0.75rem" }}>{k}</span>
