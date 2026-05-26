@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 // ─── MAIN LOGO ───────────────────────────────────────────────────────────────
 // Replace with your logo URL. Example: "https://yoursite.com/logo.png"
 // Or put logo.png in your /public folder and use "/logo.png"
-const MAIN_LOGO_URL = ""; // ← paste your logo URL here
+const MAIN_LOGO_URL = "/Ritmos del Peru.jpg"; // ← paste your logo URL here
 
 // ─── GROUPS & COLORS ─────────────────────────────────────────────────────────
 const GROUPS = ["All", "Sumaj Tusuy DMV", "Sentimiento Peruano", "Aquí Está Mi Perú", "Papalca", "Perú Folclore", "Fraternidad Matices del Perú", "Percy Chinchilla", "Chicha Morada", "Kuyayky"];
@@ -23,15 +23,15 @@ const GROUP_COLORS = {
 // ─── GROUP LOGOS ─────────────────────────────────────────────────────────────
 // Add each group's logo URL here. Leave "" to show initials instead.
 const GROUP_LOGOS = {
-  "Sumaj Tusuy DMV":             "",
-  "Sentimiento Peruano":         "",
-  "Aquí Está Mi Perú":           "",
-  "Papalca":                     "",
-  "Perú Folclore":               "",
-  "Fraternidad Matices del Perú":"",
-  "Percy Chinchilla":            "",
-  "Chicha Morada":               "",
-  "Kuyayky":                     "",
+  "Sumaj Tusuy DMV":             "/Sumaj Tusuy DMV_.JPG",
+  "Sentimiento Peruano":         "/Sentimiento Peruano USA.png",
+  "Aquí Está Mi Perú":           "/Aqui esta mi Peru.png",
+  "Papalca":                     "/Papalca.PNG",
+  "Perú Folclore":               "/Peru Folklore.JPG",
+  "Fraternidad Matices del Perú":"/Fraternida Cultural Matices del Peru.jpg",
+  "Percy Chinchilla":            "/Percy Chinchilla.PNG",
+  "Chicha Morada":               "/Chicha Morada.png",
+  "Kuyayky":                     "/Kuyayky.jpg",
 };
 
 // ─── EVENTS ──────────────────────────────────────────────────────────────────
