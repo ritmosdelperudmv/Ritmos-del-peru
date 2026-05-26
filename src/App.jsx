@@ -330,7 +330,7 @@ export default function CommunityCalendar() {
               <div>
                 <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", color:"#FFE58A", textTransform:"uppercase", margin:"0 0 0.3rem", opacity:1, display:"none" }}>✦ Calendario Comunitario</p>
                 <h1 style={{ fontFamily:"'Playfair Display', serif", fontSize:"clamp(1.6rem, 4vw, 2.6rem)", margin:"0 0 0.3rem", color:"#FFFFFF", lineHeight:1.1 }}>
-                  Danza & Cultura Peruana
+                  Ritmos del Perú DMV 2026
                 </h1>
                 <p style={{ color:"rgba(255,255,255,0.9)", margin:0, fontSize:"0.88rem", lineHeight:1.6 }}>Clases de folclore y música peruana gratuitas ofrecidas por distintas escuelas y artistas del DMV · Junio 2026</p>
               </div>
