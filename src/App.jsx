@@ -276,6 +276,21 @@ export default function CommunityCalendar() {
   const [selected, setSelected] = useState(null);
   const [nextId, setNextId] = useState(100);
   const [adminMode, setAdminMode] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const ADMIN_PASSWORD = "DMVritmos25";
+
+  const handleAdminLogin = () => {
+    if (passwordInput === ADMIN_PASSWORD) {
+      setAdminMode(true);
+      setShowPasswordModal(false);
+      setPasswordInput("");
+      setPasswordError(false);
+    } else {
+      setPasswordError(true);
+    }
+  };
 
   const filtered = useMemo(() => {
     let evs = filter === "All" ? events : events.filter(e => e.group === filter);
@@ -324,12 +339,10 @@ export default function CommunityCalendar() {
             {/* Admin toggle */}
             <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:"0.4rem" }}>
               <div style={{ display:"flex", background:"rgba(255,255,255,0.3)", border:`1px solid ${P.border}`, borderRadius:"0.6rem", overflow:"hidden" }}>
-                {[["admin","Admin"],["public","Público"]].map(([mode, label]) => (
-                  <button key={mode} onClick={() => setAdminMode(mode==="admin")}
-                    style={{ padding:"0.45rem 1rem", fontSize:"0.78rem", fontWeight:600, cursor:"pointer", border:"none", background:(adminMode&&mode==="admin")||(!adminMode&&mode==="public") ? "rgba(255,255,255,0.25)" : "transparent", color:(adminMode&&mode==="admin")||(!adminMode&&mode==="public") ? "#FFFFFF" : "rgba(255,255,255,0.6)", transition:"all 0.15s" }}>
-                    {label}
-                  </button>
-                ))}
+                <button onClick={() => { if(adminMode){ setAdminMode(false); } else { setShowPasswordModal(true); } }}
+                  style={{ padding:"0.45rem 1rem", fontSize:"0.78rem", fontWeight:600, cursor:"pointer", border:"none", background: adminMode ? "rgba(255,255,255,0.25)" : "transparent", color: adminMode ? "#FFFFFF" : "rgba(255,255,255,0.6)", transition:"all 0.15s" }}>
+                  {adminMode ? "🔓 Admin" : "🔒 Admin"}
+                </button>
               </div>
               {adminMode && draftCount > 0 && <span style={{ fontSize:"0.7rem", color:"#FFE58A" }}>◌ {draftCount} borrador{draftCount!==1?"es":""} ocultos</span>}
             </div>
@@ -386,6 +399,33 @@ export default function CommunityCalendar() {
       </div>
 
       {/* ── MODALS ── */}
+      {/* Password Modal */}
+      {showPasswordModal && (
+        <Modal onClose={() => { setShowPasswordModal(false); setPasswordInput(""); setPasswordError(false); }}>
+          <div>
+            <div style={{ textAlign:"center", marginBottom:"1.5rem" }}>
+              <div style={{ fontSize:"2.5rem", marginBottom:"0.5rem" }}>🔒</div>
+              <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.4rem", margin:"0 0 0.25rem" }}>Acceso Admin</h2>
+              <p style={{ color:P.muted, fontSize:"0.85rem", margin:0 }}>Ingresa tu contraseña para continuar</p>
+            </div>
+            <input
+              type="password"
+              value={passwordInput}
+              onChange={e => { setPasswordInput(e.target.value); setPasswordError(false); }}
+              onKeyDown={e => e.key === "Enter" && handleAdminLogin()}
+              placeholder="Contraseña"
+              style={{ width:"100%", background:"#FDF6E3", border:`2px solid ${passwordError ? P.red : P.border}`, borderRadius:"0.5rem", padding:"0.75rem 1rem", color:P.text, fontSize:"1rem", outline:"none", boxSizing:"border-box", marginBottom:"0.5rem" }}
+              autoFocus
+            />
+            {passwordError && <p style={{ color:P.red, fontSize:"0.8rem", margin:"0 0 0.75rem" }}>❌ Contraseña incorrecta. Intenta de nuevo.</p>}
+            <button onClick={handleAdminLogin}
+              style={{ width:"100%", padding:"0.75rem", background:`linear-gradient(135deg, ${P.red}, ${P.gold})`, border:"none", borderRadius:"0.5rem", color:"#fff", fontWeight:700, fontSize:"1rem", cursor:"pointer", marginTop:"0.5rem" }}>
+              Entrar
+            </button>
+          </div>
+        </Modal>
+      )}
+
       {(modal==="add"||modal==="edit") && (
         <Modal onClose={() => { setModal(null); setSelected(null); }}>
           <EventForm initial={selected} onSave={handleSave} onCancel={() => { setModal(null); setSelected(null); }} />
