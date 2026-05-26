@@ -8,6 +8,30 @@ const MAIN_LOGO_URL = "/ritmos del peru logo.jpg"; // ← paste your logo URL he
 // ─── GROUPS & COLORS ─────────────────────────────────────────────────────────
 const GROUPS = ["All", "Sumaj Tusuy DMV", "Sentimiento Peruano", "Aquí Está Mi Perú", "Papalca", "Perú Folclore", "Fraternidad Matices del Perú", "Percy Chinchilla", "Chicha Morada", "Kuyayky"];
 
+const GROUP_INSTAGRAM = {
+  "Sumaj Tusuy DMV":             "sumajtusuydmv",
+  "Sentimiento Peruano":         "sentimientoperuanousa",
+  "Aquí Está Mi Perú":           "aquiesta.miperu",
+  "Papalca":                     "papalca_",
+  "Perú Folclore":               "perufolkloreschool",
+  "Fraternidad Matices del Perú":"fcmaticesdelperu",
+  "Percy Chinchilla":            "percy_chinchilla",
+  "Chicha Morada":               "chichamorada_",
+  "Kuyayky":                     "kuyaykyfnd",
+};
+
+const REQUIRES_REGISTRATION = ["Sentimiento Peruano", "Papalca"];
+
+const REGISTRATION_CONTACT = {
+  "Sentimiento Peruano": "Inscripciones: Catherine · 703-304-8322",
+  "Papalca":             "Inscripciones: Victor · 240-839-8803",
+};
+
+const SPONSORS = [
+  { name: "Inca Social", instagram: "incasocial", logo: "/Inca Social.PNG" },
+  { name: "Calletana's Peruvian Fast Food", instagram: "calletanasperuvianfastfood", logo: "/Calletanas.PNG" },
+];
+
 const GROUP_COLORS = {
   "Sumaj Tusuy DMV":             "#C0392B",
   "Sentimiento Peruano":         "#E67E22",
@@ -189,6 +213,30 @@ function CardView({ events, onEdit, onDelete, onView, onTogglePublish, adminMode
             {ev.location && <p style={{ color:P.muted, fontSize:"0.82rem", margin:"0 0 0.75rem" }}>📍 {ev.location.slice(0,60)}{ev.location.length>60?"…":""}</p>}
             {ev.description && <p style={{ color:"#a07850", fontSize:"0.8rem", margin:0, lineHeight:1.5 }}>{ev.description.slice(0,80)}{ev.description.length>80?"…":""}</p>}
 
+            {/* Registration badge */}
+            {REQUIRES_REGISTRATION.includes(ev.group) && (
+              <div style={{ marginTop:"0.75rem", background:"rgba(192,57,43,0.06)", border:`1px solid ${P.red}35`, borderRadius:"0.5rem", padding:"0.5rem 0.75rem" }}>
+                <div style={{ fontSize:"0.72rem", color:P.red, fontWeight:700, marginBottom:"0.2rem" }}>📋 Requiere registro previo</div>
+                <div style={{ fontSize:"0.78rem", color:P.brown }}>{REGISTRATION_CONTACT[ev.group]}</div>
+              </div>
+            )}
+            {/* Public action buttons */}
+            {!adminMode && (
+              <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.85rem", flexWrap:"wrap" }} onClick={e => e.stopPropagation()}>
+                {ev.date && (
+                  <a href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${ev.date.replace(/-/g,"")}T${ev.time ? "190000" : "120000"}/${ev.date.replace(/-/g,"")}T${ev.time ? "210000" : "140000"}&details=${encodeURIComponent(ev.description)}&location=${encodeURIComponent(ev.location)}`} target="_blank" rel="noopener noreferrer"
+                    style={{ fontSize:"0.72rem", padding:"0.3rem 0.7rem", background:"rgba(66,133,244,0.1)", border:"1px solid rgba(66,133,244,0.3)", borderRadius:"0.4rem", color:"#4285F4", cursor:"pointer", textDecoration:"none", display:"inline-flex", alignItems:"center", gap:"0.3rem" }}>
+                    📅 Google Calendar
+                  </a>
+                )}
+                {GROUP_INSTAGRAM[ev.group] && (
+                  <a href={`https://instagram.com/${GROUP_INSTAGRAM[ev.group]}`} target="_blank" rel="noopener noreferrer"
+                    style={{ fontSize:"0.72rem", padding:"0.3rem 0.7rem", background:"rgba(225,48,108,0.08)", border:"1px solid rgba(225,48,108,0.25)", borderRadius:"0.4rem", color:"#E1306C", cursor:"pointer", textDecoration:"none", display:"inline-flex", alignItems:"center", gap:"0.3rem" }}>
+                    📸 Instagram
+                  </a>
+                )}
+              </div>
+            )}
             {adminMode && (
               <div style={{ display:"flex", gap:"0.5rem", marginTop:"1rem", flexWrap:"wrap" }} onClick={e => e.stopPropagation()}>
                 <button onClick={() => onEdit(ev)} style={{ fontSize:"0.72rem", padding:"0.28rem 0.65rem", background:`${P.gold}18`, border:`1px solid ${P.gold}50`, borderRadius:"0.4rem", color:P.gold, cursor:"pointer" }}>Editar</button>
@@ -396,6 +444,27 @@ export default function CommunityCalendar() {
           ? <CardView events={filtered} onEdit={ev=>{setSelected(ev);setModal("edit");}} onDelete={handleDelete} onView={ev=>{setSelected(ev);setModal("view");}} onTogglePublish={handleTogglePublish} adminMode={adminMode} />
           : <CalendarView events={filtered} onView={ev=>{setSelected(ev);setModal("view");}} />
         }
+      </div>
+
+      {/* ── SPONSORS ── */}
+      <div style={{ borderTop:`2px solid ${P.border}`, background:P.tan, padding:"2rem 1.5rem" }}>
+        <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
+          <p style={{ textAlign:"center", fontSize:"0.72rem", letterSpacing:"0.15em", textTransform:"uppercase", color:P.muted, marginBottom:"1.25rem" }}>✦ Patrocinadores</p>
+          <div style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:"2rem", flexWrap:"wrap" }}>
+            {SPONSORS.map(s => (
+              <a key={s.name} href={`https://instagram.com/${s.instagram}`} target="_blank" rel="noopener noreferrer"
+                style={{ display:"flex", alignItems:"center", gap:"0.75rem", textDecoration:"none", background:"#fff", border:`1px solid ${P.border}`, borderRadius:"0.75rem", padding:"0.75rem 1.25rem", transition:"transform 0.2s" }}
+                onMouseEnter={e => e.currentTarget.style.transform="translateY(-2px)"}
+                onMouseLeave={e => e.currentTarget.style.transform="translateY(0)"}>
+                <img src={s.logo} alt={s.name} style={{ height:"40px", objectFit:"contain" }} />
+                <div>
+                  <div style={{ fontSize:"0.8rem", fontWeight:700, color:P.text }}>{s.name}</div>
+                  <div style={{ fontSize:"0.72rem", color:"#E1306C" }}>@{s.instagram}</div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* ── MODALS ── */}
