@@ -554,14 +554,14 @@ export default function CommunityCalendar() {
           <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", textTransform:"uppercase", color:P.gold, margin:"0 0 0.4rem" }}>✦ Ubicaciones</p>
           <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.5rem", margin:"0 0 1.5rem" }}>¿Dónde son los eventos?</h2>
           <div style={{ borderRadius:"1rem", overflow:"hidden", border:`2px solid ${P.border}`, boxShadow:`0 4px 20px ${P.gold}20` }}>
-            <a href="https://www.google.com/maps/search/?api=1&query=Peruvian+dance+classes+DMV+Virginia+Maryland" target="_blank" rel="noopener noreferrer" style={{ display:"block", textDecoration:"none" }}>
+            <a href="https://www.google.com/maps/dir/George+Mason+Regional+Library,+7001+Little+River+Tpke,+Annandale,+VA+22003/Thomas+Jefferson+Library,+7415+Arlington+Blvd,+Falls+Church,+VA+22042/Richard+Byrd+Library,+7250+Commerce+St,+Springfield,+VA+22150/3700+S+Four+Mile+Run+Dr,+Arlington,+VA/Gaithersburg+Elementary,+35+N+Summit+Ave,+Gaithersburg,+MD+20877/14301+Climbing+Rose+Way,+Centreville,+VA+20121/Calletana's,+4300+Chantilly+Shopping+Center,+Chantilly,+VA/1776+Wilson+Blvd,+Arlington,+VA/Washington+Square+Neighborhood+Park,+17800+Amity+Dr,+Gaithersburg,+MD" target="_blank" rel="noopener noreferrer" style={{ display:"block", textDecoration:"none" }}>
               <div style={{ width:"100%", height:"280px", background:`linear-gradient(135deg, ${P.tan}, #fff)`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem", border:`2px dashed ${P.border}`, borderRadius:"0.75rem", cursor:"pointer" }}>
                 <div style={{ fontSize:"3rem" }}>🗺️</div>
                 <div style={{ textAlign:"center" }}>
-                  <p style={{ fontFamily:"'Playfair Display', serif", fontSize:"1.2rem", color:P.text, margin:"0 0 0.4rem", fontWeight:700 }}>Ver todos los eventos en Google Maps</p>
-                  <p style={{ fontSize:"0.85rem", color:P.muted, margin:0 }}>Toca para abrir el mapa con todas las ubicaciones</p>
+                  <p style={{ fontFamily:"'Playfair Display', serif", fontSize:"1.2rem", color:P.text, margin:"0 0 0.4rem", fontWeight:700 }}>Ver todas las ubicaciones en Google Maps</p>
+                  <p style={{ fontSize:"0.85rem", color:P.muted, margin:0 }}>Toca cada tarjeta abajo para abrir la dirección exacta</p>
                 </div>
-                <div style={{ padding:"0.6rem 1.5rem", background:`linear-gradient(135deg, ${P.red}, ${P.gold})`, borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.9rem" }}>Abrir Mapa →</div>
+                <div style={{ padding:"0.6rem 1.5rem", background:`linear-gradient(135deg, ${P.red}, ${P.gold})`, borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.9rem" }}>Ver área del DMV →</div>
               </div>
             </a>
           </div>
