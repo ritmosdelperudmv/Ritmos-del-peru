@@ -338,7 +338,7 @@ function ShareBar() {
           style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem", padding:"0.6rem 1.25rem", background:"#25D366", border:"none", borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.85rem", textDecoration:"none", cursor:"pointer" }}>
           💬 WhatsApp
         </a>
-        <a href={`mailto:?subject=${encodeURIComponent("Ritmos del Perú DMV 2026")}&body=${encodeURIComponent(text + "
+        <a href={`mailto:?subject=${encodeURIComponent("Ritmos del Peru DMV 2026")}&body=${encodeURIComponent(text + "
 
 " + url)}`}
           style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem", padding:"0.6rem 1.25rem", background:"rgba(255,255,255,0.15)", border:"2px solid rgba(255,255,255,0.4)", borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.85rem", textDecoration:"none", cursor:"pointer" }}>
