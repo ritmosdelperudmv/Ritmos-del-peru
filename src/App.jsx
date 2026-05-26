@@ -316,6 +316,43 @@ function CalendarView({ events, onView }) {
   );
 }
 
+function ShareBar() {
+  const [copied, setCopied] = useState(false);
+  const url = window.location.href;
+  const text = "🇵🇪 Clases gratuitas de danza y música peruana en el DMV — Junio 2026";
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <div style={{ background:P.red, padding:"1.5rem", textAlign:"center" }}>
+      <p style={{ color:"rgba(255,255,255,0.9)", fontSize:"0.85rem", margin:"0 0 1rem", letterSpacing:"0.05em" }}>
+        🎉 ¡Comparte el calendario con tu comunidad!
+      </p>
+      <div style={{ display:"flex", justifyContent:"center", gap:"0.75rem", flexWrap:"wrap" }}>
+        <a href={`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`} target="_blank" rel="noopener noreferrer"
+          style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem", padding:"0.6rem 1.25rem", background:"#25D366", border:"none", borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.85rem", textDecoration:"none", cursor:"pointer" }}>
+          💬 WhatsApp
+        </a>
+        <a href={`mailto:?subject=${encodeURIComponent("Ritmos del Perú DMV 2026")}&body=${encodeURIComponent(text + "
+
+" + url)}`}
+          style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem", padding:"0.6rem 1.25rem", background:"rgba(255,255,255,0.15)", border:"2px solid rgba(255,255,255,0.4)", borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.85rem", textDecoration:"none", cursor:"pointer" }}>
+          📧 Email
+        </a>
+        <button onClick={copyLink}
+          style={{ display:"inline-flex", alignItems:"center", gap:"0.5rem", padding:"0.6rem 1.25rem", background: copied ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.15)", border:"2px solid rgba(255,255,255,0.4)", borderRadius:"999px", color:"#fff", fontWeight:700, fontSize:"0.85rem", cursor:"pointer" }}>
+          {copied ? "✅ ¡Copiado!" : "🔗 Copiar enlace"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function CommunityCalendar() {
   const [events, setEvents] = useState(SAMPLE_EVENTS);
   const [view, setView] = useState("cards");
@@ -445,6 +482,72 @@ export default function CommunityCalendar() {
           : <CalendarView events={filtered} onView={ev=>{setSelected(ev);setModal("view");}} />
         }
       </div>
+
+      {/* ── ABOUT ── */}
+      <div style={{ background:P.bgMid, borderTop:`3px solid ${P.gold}`, borderBottom:`1px solid ${P.border}`, padding:"3rem 1.5rem" }}>
+        <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
+          <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", textTransform:"uppercase", color:P.gold, margin:"0 0 1rem" }}>¿Qué es Ritmos del Perú?</p>
+          <p style={{ fontSize:"clamp(1rem, 2.5vw, 1.25rem)", color:P.text, lineHeight:1.7, margin:"0 0 2rem", maxWidth:"800px" }}>
+            Un calendario de eventos que ofrece clases y talleres gratuitos en el área del DMV, ofrecidas por distintos grupos de danza y música peruana.
+          </p>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(250px, 1fr))", gap:"1.25rem" }}>
+            {[
+              { title:"Visibilidad", color:"#0E9E8E", text:"Conectamos grupos con la comunidad y atraemos nuevas personas a la cultura peruana." },
+              { title:"Comunidad",   color:P.gold,    text:"Creamos un espacio para descubrir, explorar y celebrar la danza y música del Perú." },
+              { title:"Mes Patrio",  color:"#C9A87C",  text:"Preparamos a la comunidad para las celebraciones de independencia de julio." },
+            ].map(card => (
+              <div key={card.title} style={{ background:P.bgCard, border:`1px solid ${P.border}`, borderTop:`3px solid ${card.color}`, borderRadius:"0.75rem", padding:"1.5rem" }}>
+                <h3 style={{ fontFamily:"'Playfair Display', serif", color:card.color, fontSize:"1.3rem", margin:"0 0 1rem" }}>{card.title}</h3>
+                <p style={{ color:P.muted, fontSize:"0.92rem", lineHeight:1.65, margin:0 }}>{card.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── MAP ── */}
+      <div style={{ background:P.tan, borderBottom:`1px solid ${P.border}`, padding:"3rem 1.5rem" }}>
+        <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
+          <p style={{ fontSize:"0.72rem", letterSpacing:"0.2em", textTransform:"uppercase", color:P.gold, margin:"0 0 0.4rem" }}>✦ Ubicaciones</p>
+          <h2 style={{ fontFamily:"'Playfair Display', serif", color:P.text, fontSize:"1.5rem", margin:"0 0 1.5rem" }}>¿Dónde son los eventos?</h2>
+          <div style={{ borderRadius:"1rem", overflow:"hidden", border:`2px solid ${P.border}`, boxShadow:`0 4px 20px ${P.gold}20` }}>
+            <iframe
+              title="Mapa de eventos"
+              width="100%"
+              height="420"
+              style={{ border:0, display:"block" }}
+              loading="lazy"
+              allowFullScreen
+              src={`https://www.google.com/maps/embed/v1/search?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=George+Mason+Regional+Library+Annandale+VA|Thomas+Jefferson+Library+Falls+Church+VA|Richard+Byrd+Library+Springfield+VA|3700+S+Four+Mile+Run+Arlington+VA|Gaithersburg+Elementary+35+N+Summit+Ave+MD|14301+Climbing+Rose+Way+Centreville+VA|Calletanas+4300+Chantilly+Shopping+Center+VA|Inca+Social+1776+Wilson+Blvd+Arlington+VA`}
+            />
+          </div>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:"0.75rem", marginTop:"1.25rem" }}>
+            {[
+              { name:"George Mason Regional Library", addr:"7001 Little River Tpke, Annandale, VA 22003", groups:"Sumaj Tusuy DMV · Kuyayky" },
+              { name:"Thomas Jefferson Library", addr:"7415 Arlington Blvd, Falls Church, VA 22042", groups:"Sumaj Tusuy DMV" },
+              { name:"Richard Byrd Library", addr:"7250 Commerce St, Springfield, VA 22150", groups:"Sumaj Tusuy DMV" },
+              { name:"3700 S Four Mile Run", addr:"Arlington, VA", groups:"Sentimiento Peruano" },
+              { name:"Gaithersburg Elementary", addr:"35 N Summit Ave, Gaithersburg, MD 20877", groups:"Aquí Está Mi Perú" },
+              { name:"14301 Climbing Rose Way", addr:"Centreville, VA 20121", groups:"Perú Folclore" },
+              { name:"Calletana's", addr:"4300 Chantilly Shopping Center, VA", groups:"Percy Chinchilla" },
+              { name:"Inca Social", addr:"1776 Wilson Blvd, Arlington, VA", groups:"Chicha Morada" },
+              { name:"Washington Square Neighborhood Park", addr:"17800 Amity Drive, Gaithersburg, MD", groups:"Fraternidad Matices del Perú" },
+            ].map(loc => (
+              <a key={loc.name} href={`https://maps.google.com/?q=${encodeURIComponent(loc.addr)}`} target="_blank" rel="noopener noreferrer"
+                style={{ background:"#fff", border:`1px solid ${P.border}`, borderRadius:"0.6rem", padding:"0.75rem 1rem", textDecoration:"none", display:"block", transition:"transform 0.15s" }}
+                onMouseEnter={e => e.currentTarget.style.transform="translateY(-2px)"}
+                onMouseLeave={e => e.currentTarget.style.transform="translateY(0)"}>
+                <div style={{ fontSize:"0.82rem", fontWeight:700, color:P.text, marginBottom:"0.2rem" }}>📍 {loc.name}</div>
+                <div style={{ fontSize:"0.75rem", color:P.muted, marginBottom:"0.2rem" }}>{loc.addr}</div>
+                <div style={{ fontSize:"0.7rem", color:P.gold, fontWeight:600 }}>{loc.groups}</div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── SHARE ── */}
+      <ShareBar />
 
       {/* ── SPONSORS ── */}
       <div style={{ borderTop:`2px solid ${P.border}`, background:P.tan, padding:"2rem 1.5rem" }}>
